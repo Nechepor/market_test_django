@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Product List</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+    table tr:hover td {
+        background-color: #f0f0f0;
+    }
+</style>
+</head>
+<body>
+    <div class="container">
+        <div class="text-right mt-3">
+            {% if user.is_authenticated %}
+                <p>Вы вошли как: {{ user.username }} <a href="{% url 'logout' %}" class="btn btn-danger">Выйти</a> </p>
+
+            {% else %}
+                <p>Вы не вошли в систему</p>
+            {% endif %}
+        </div>
+        <h1>Список товаров</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Наименование</th>
+                    <th>Категория</th>
+                    <th>Активность товара</th>
+                    <th>Цена</th>
+                    <th>Количество заказов в прошлом месяце</th>
+                    <th>Количество заказов в этом месяце</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for product in products %}
+                <tr>
+                    <td>{{ product.id }}</td>
+                    <td>{{ product.title }}</td>
+                    <td>{{ product.category }}</td>
+                    <td>
+                        {% if product.is_active %}
+                            <span class="text-success">&#10003;</span>
+                        {% else %}
+                            <span class="text-danger">&#10007;</span>
+                        {% endif %}
+                    </td>
+                    <td>{{ product.price }}</td>
+                    <td>{{ product.previous_month_orders }}</td>
+                    <td>{{ product.current_month_orders }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

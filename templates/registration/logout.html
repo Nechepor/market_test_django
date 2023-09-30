@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Logout</title>
+    <!-- Подключите файлы Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+</head>
+<body>
+<div class="container">
+    <div class="text-right mt-3">
+        {% if user.is_authenticated %}
+            <p>Вы вошли как: {{ user.username }}</p>
+        {% else %}
+            <p>Вы не вошли в систему</p>
+        {% endif %}
+    </div>
+    <div class="row justify-content-center mt-5">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header">Выход</div>
+                <div class="card-body">
+                    <p>Вы успешно вышли из системы.</p>
+                    <a href="{% url 'login' %}" class="btn btn-primary">Войти снова</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

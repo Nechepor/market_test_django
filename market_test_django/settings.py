@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.2/ref/settings/
 """
 
 from pathlib import Path
+from decouple import config
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -37,7 +38,12 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'products_table',
 ]
+LOGIN_REDIRECT_URL = '/market/product-list'
+
+# Укажите URL, куда будет перенаправляться после выхода
+LOGOUT_REDIRECT_URL = '/login'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -73,11 +79,16 @@ WSGI_APPLICATION = 'market_test_django.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/4.2/ref/settings/#databases
+DEV_MODE = config('DEV_MODE', default=False, cast=bool)
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'mydb',
+        'USER': 'myuser',
+        'PASSWORD': 'mypassword',
+        'HOST': 'localhost' if DEV_MODE else 'db',
+        'PORT': '5432',
     }
 }
 
