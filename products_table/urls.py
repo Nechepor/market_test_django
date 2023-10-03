@@ -4,5 +4,5 @@ from . import views
 
 
 urlpatterns = [
-    path('product-list/', login_required(views.product_list), name='product-list'),
+    path('product-list/', login_required(views.ProductListView.as_view()), name='product-list'),
 ]

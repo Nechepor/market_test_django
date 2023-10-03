@@ -1,6 +1,15 @@
 version: "3"
 
 services:
+  cleanup:
+    image: postgres:latest
+    volumes:
+      - /var/lib/postgresql/data
+    command: |
+      /bin/bash -c "rm -rf /var/lib/postgresql/data/*"
+    depends_on:
+      - db
+
   db:
     image: postgres:latest
     environment:

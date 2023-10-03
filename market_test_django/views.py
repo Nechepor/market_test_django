@@ -3,6 +3,6 @@ from django.views.generic import CreateView
 
 
 class CustomRegisterView(CreateView):
-    template_name = 'register.html'
+    template_name = 'registration/register.html'
     form_class = UserCreationForm
     success_url = '/login/'
